@@ -628,6 +628,15 @@ namespace LenovoLegionToolkit.Lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string RGBKeyboardBacklightBrightness_Medium {
+            get {
+                return ResourceManager.GetString("RGBKeyboardBacklightBrightness_Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Breath.
         /// </summary>
         public static string RGBKeyboardBacklightEffect_Breath {

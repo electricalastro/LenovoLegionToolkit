@@ -21,7 +21,6 @@ namespace LenovoLegionToolkit.Lib.Controllers
         private static readonly AsyncLock IoLock = new();
 
         private SafeFileHandle? _deviceHandle;
-
         private SafeFileHandle? DeviceHandle
         {
             get
@@ -336,6 +335,7 @@ namespace LenovoLegionToolkit.Lib.Controllers
                 Brightness = preset.Brightness switch
                 {
                     RGBKeyboardBacklightBrightness.Low => 1,
+                    RGBKeyboardBacklightBrightness.Medium => 1,
                     RGBKeyboardBacklightBrightness.High => 2,
                     _ => 0
                 }
@@ -356,11 +356,31 @@ namespace LenovoLegionToolkit.Lib.Controllers
 
             if (preset.Effect is RGBKeyboardBacklightEffect.Static or RGBKeyboardBacklightEffect.Breath)
             {
+                if (preset.Brightness is RGBKeyboardBacklightBrightness.Low)
+                {
+                    return DimRGBKeyboardBacklight(preset, result);
+                }
+
                 result.Zone1Rgb = [preset.Zone1.R, preset.Zone1.G, preset.Zone1.B];
                 result.Zone2Rgb = [preset.Zone2.R, preset.Zone2.G, preset.Zone2.B];
                 result.Zone3Rgb = [preset.Zone3.R, preset.Zone3.G, preset.Zone3.B];
                 result.Zone4Rgb = [preset.Zone4.R, preset.Zone4.G, preset.Zone4.B];
             }
+
+            return result;
+        }
+
+        private static LENOVO_RGB_KEYBOARD_STATE DimRGBKeyboardBacklight(RGBKeyboardBacklightBacklightPresetDescription preset, LENOVO_RGB_KEYBOARD_STATE result, int dimFactor = 3)
+        {
+            RGBColor dimmedZone1 = preset.Zone1 / dimFactor;
+            RGBColor dimmedZone2 = preset.Zone2 / dimFactor;
+            RGBColor dimmedZone3 = preset.Zone3 / dimFactor;
+            RGBColor dimmedZone4 = preset.Zone4 / dimFactor;
+
+            result.Zone1Rgb = [dimmedZone1.R, dimmedZone1.G, dimmedZone1.B];
+            result.Zone2Rgb = [dimmedZone2.R, dimmedZone2.G, dimmedZone2.B];
+            result.Zone3Rgb = [dimmedZone3.R, dimmedZone3.G, dimmedZone3.B];
+            result.Zone4Rgb = [dimmedZone4.R, dimmedZone4.G, dimmedZone4.B];
 
             return result;
         }

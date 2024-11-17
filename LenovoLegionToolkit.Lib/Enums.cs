@@ -398,6 +398,8 @@ public enum RGBKeyboardBacklightBrightness
 {
     [Display(ResourceType = typeof(Resource), Name = "RGBKeyboardBacklightBrightness_Low")]
     Low,
+    [Display(ResourceType = typeof(Resource), Name = "RGBKeyboardBacklightBrightness_Medium")]
+    Medium,
     [Display(ResourceType = typeof(Resource), Name = "RGBKeyboardBacklightBrightness_High")]
     High
 }

@@ -584,6 +584,7 @@ public readonly struct RGBColor(byte r, byte g, byte b)
     public static bool operator ==(RGBColor left, RGBColor right) => left.Equals(right);
 
     public static bool operator !=(RGBColor left, RGBColor right) => !left.Equals(right);
+    public static RGBColor operator /(RGBColor color, int dimFactor) => new(color.R.DivideBy(dimFactor), color.G.DivideBy(dimFactor), color.B.DivideBy(dimFactor));
 
     #endregion
 

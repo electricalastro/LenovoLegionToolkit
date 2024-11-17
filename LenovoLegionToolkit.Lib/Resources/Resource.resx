@@ -270,6 +270,9 @@
   <data name="RGBKeyboardBacklightBrightness_High" xml:space="preserve">
     <value>High</value>
   </data>
+  <data name="RGBKeyboardBacklightBrightness_Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
   <data name="RGBKeyboardBacklightBrightness_Low" xml:space="preserve">
     <value>Low</value>
   </data>
