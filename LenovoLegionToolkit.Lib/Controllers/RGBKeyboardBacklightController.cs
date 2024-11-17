@@ -21,6 +21,7 @@ namespace LenovoLegionToolkit.Lib.Controllers
         private static readonly AsyncLock IoLock = new();
 
         private SafeFileHandle? _deviceHandle;
+
         private SafeFileHandle? DeviceHandle
         {
             get
